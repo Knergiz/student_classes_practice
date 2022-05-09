@@ -1,3 +1,7 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+
 public class Test {
     public static void main(String[] args) {
 
@@ -22,5 +26,46 @@ public class Test {
         Print how many students are MathStudent with message -> "Math students = {numberOfMathStudents}"
         Print how many students are ScienceStudent with message -> "Science students = {numberOfScienceStudents}"
          */
+
+        Scanner input = new Scanner(System.in);
+        ArrayList<Student> students = new ArrayList<>();
+        int mathCount = 0;
+        int scienceCount = 0;
+
+        while (students.size() < 3) {
+            System.out.println(UserQuestions.askToJoin);
+            String answer = input.next();
+            if (answer.equalsIgnoreCase("y")){
+
+                System.out.println(UserQuestions.askFirstName);
+                String firstName = input.next();
+                System.out.println(UserQuestions.askLastName);
+                String lastName = input.next();
+                System.out.println(UserQuestions.askAge);
+                int age = input.nextInt();
+                Permission.checkAge(age);
+                System.out.println(UserQuestions.askGender);
+                String gender = input.next();
+                System.out.println(UserQuestions.askClassName);
+                String className = input.next();
+                Permission.checkClassName(className);
+
+                if (className.equalsIgnoreCase("math")){
+                    students.add(new MathStudent(firstName, lastName, age, gender, className));
+                    mathCount++;
+                }else{
+                    students.add(new ScienceStudent(firstName, lastName, age, gender, className));
+                    scienceCount++;
+                }
+            }
+        }
+        System.out.println(students);
+        System.out.println("Math students = " + mathCount);
+        System.out.println("Science students = " + scienceCount);
+
+
+
+
+
     }
 }
